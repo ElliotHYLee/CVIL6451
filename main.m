@@ -1,13 +1,13 @@
 clc, clear, close all
 
-img = imread('img0.jpg');
-[h, w, c] = size(img)
-img = imresize(img, [h/2, w/2]);
+img = getImage('img0.jpg');
 imshow(img)
 
+[L,N] = superpixels(img,1000);
 
-
-
+figure
+BW = boundarymask(L);
+imshow(imoverlay(img,BW,'cyan'))
 
 
 
