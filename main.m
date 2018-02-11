@@ -37,8 +37,8 @@ color;
 % dlmwrite('MyMatrix.txt', color, 'delimiter','\t')
 
 diffused = importdata('diffused.txt');
-m = diffused(:,1)/8;
-c = diffused(:,2:4)*8;
+m = diffused(:,1)/16;
+c = diffused(:,2:4)*16;
 mc = m.*c;
 
 md = ones(size(greyDummy),'like',greyDummy)*255;
