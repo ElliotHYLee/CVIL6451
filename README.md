@@ -32,10 +32,13 @@ description
 
 <ul>
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/md.jpg" width="400">
+md
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/cd.jpg" width="400">
+cd
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/ms.jpg" width="400">
+ms
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/cs.jpg" width="400">
-
+cs
 </ul>
 
 ## Test Results
