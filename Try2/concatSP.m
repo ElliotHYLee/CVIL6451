@@ -8,8 +8,6 @@ function[img] = concatSP(sp, img, idx)
         greenIdx = idx{cellIndex}+numRows*numCols;
         blueIdx = idx{cellIndex}+2*numRows*numCols;
         eachCell = sp{cellIndex};
-        size(img(redIdx))
-        size(eachCell(:,1))
         img(redIdx) = eachCell(:,1);
         if channel ==3
             img(greenIdx) = eachCell(:,2);
