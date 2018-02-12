@@ -62,7 +62,7 @@ LD						     LS
 <br>
 <pre>
 <div align='center'>
-Observed					      Estimated
+Observed					      LD+LS
 </pre>
 </div>
 </ul>
