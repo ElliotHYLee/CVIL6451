@@ -20,6 +20,7 @@ numRows = size(img,1);
 numCols = size(img,2);
 for labelVal = 1:N
     redIdx = idx{labelVal};
+    pixelNumList(labelVal, :) = size(redIdx);
     greenIdx = idx{labelVal}+numRows*numCols;
     blueIdx = idx{labelVal}+2*numRows*numCols;
     color(labelVal, :) = [mean(img(redIdx)), mean(img(greenIdx)), mean(img(blueIdx))];
@@ -40,47 +41,60 @@ for i =1:1:N
    dlmwrite(strcat('data/CD_lstm/cd_input', int2str(i-1), '.txt'), spixel, 'delimiter',' ')
 end
 min
-dlmwrite('data/CD_lstm/cd_init.txt', color, 'delimiter',' ')
-dlmwrite('data/CD_lstm/cd_info.txt', [min, N], 'delimiter',' ')
+% dlmwrite('data/CD_lstm/cd_init.txt', color, 'delimiter',' ')
+% dlmwrite('data/CD_lstm/cd_info.txt', [min, N], 'delimiter',' ')
+% 
+% %% FC data gen -- Ms & md
+% imgArray = reshape(img, [numRows*numCols, 3]);
+% grayArray = reshape(gray, [numRows*numCols, 1]);
+% % img(1,1,:)
+% % img(2,1,:)
+% 
+% dlmwrite('data/M_fc/color.txt', imgArray, 'delimiter',' ')
+% dlmwrite('data/M_fc/gray.txt', grayArray, 'delimiter',' ')
+% 
+% 
+% gArr = importdata('data/M_fc/predGray.txt');
+% recovImg = reshape(gArr, [numRows, numCols, 1]);
+% figure
+% imshow(recovImg)
+% 
+% 
+% 
+% cd_img_rec = zeros(size(img),'like',img);
+% recColor = importdata('data/CD_lstm/cd_pred.txt');
+% for labelVal = 1:N
+%     redIdx = idx{labelVal};
+%     greenIdx = idx{labelVal}+numRows*numCols;
+%     blueIdx = idx{labelVal}+2*numRows*numCols;
+%     color(labelVal, :) = [mean(img(redIdx)), mean(img(greenIdx)), mean(img(blueIdx))];
+%     cd_img_rec = updateImg(cd_img_rec, recColor, idx, labelVal, 3);
+% end   
+% 
+% figure
+% imshow(cd_img_rec)
 
-%% FC data gen -- Ms & md
-imgArray = reshape(img, [numRows*numCols, 3]);
-grayArray = reshape(gray, [numRows*numCols, 1]);
-% img(1,1,:)
-% img(2,1,:)
 
-dlmwrite('data/M_fc/color.txt', imgArray, 'delimiter',' ')
-dlmwrite('data/M_fc/gray.txt', grayArray, 'delimiter',' ')
-
-
-gArr = importdata('data/M_fc/predGray.txt');
-recovImg = reshape(gArr, [numRows, numCols, 1]);
-figure
-imshow(recovImg)
-
-
-
-cd_img_rec = zeros(size(img),'like',img);
-recColor = importdata('data/CD_lstm/cd_pred.txt');
+pixelNumList = pixelNumList(:,1)
+md_img = zeros_like(gray);
+cd_img = zeros_like(img);
+totalData = importdata('mdcd.txt');
+start = 1
 for labelVal = 1:N
-    redIdx = idx{labelVal};
-    greenIdx = idx{labelVal}+numRows*numCols;
-    blueIdx = idx{labelVal}+2*numRows*numCols;
-    color(labelVal, :) = [mean(img(redIdx)), mean(img(greenIdx)), mean(img(blueIdx))];
-    cd_img_rec = updateImg(cd_img_rec, recColor, idx, labelVal, 3);
-end   
+    last = start + pixelNumList(labelVal) - 1
+    sp_md{labelVal} = totalData(start:last, 1);
+    sp_cd{labelVal} = totalData(start:last, 2:4);
+    start = last + 1
+end
+
+md_img = concatSP(sp_md, md_img, idx);
+cd_img = concatSP(sp_cd, cd_img, idx);
+
 
 figure
-imshow(cd_img_rec)
+imshow(md_img)
 
-
-
-
-
-
-
-
-
-
+figure
+imshow(cd_img)
 
 
