@@ -5,7 +5,7 @@ sudo -H pip install --upgrade pip
 sudo apt-get install python-tk
 
 sudo -H pip install numpy
-sudo -H pip install scipy
+sudo --no-cache-dir pip install scipy
 sudo -H pip install pandas
 sudo -H pip install matplotlib
 sudo -H pip install scikit-learn
@@ -15,7 +15,7 @@ sudo -H pip install pillow
 sudo -H pip install django==1.11.8
 sudo -H pip install image
 sudo -H pip install enum
-
+sudo --no-cache-dir pip install h5py
 
 #sudo apt-get install python3-pip
 #sudo -H pip3 install --upgrade pip
