@@ -35,7 +35,7 @@ description
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/cd.jpg" width="400">
 <pre>
 <div align='center'>
-md                       cd
+md							cd
 </pre>
 </div>
 <br>
