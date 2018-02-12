@@ -33,10 +33,9 @@ description
 <ul>
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/md.jpg" width="400">
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/cd.jpg" width="400">
-<br>
 <pre>
 <div align='center'>
-md          cd
+md                       cd
 </pre>
 </div>
 <br>
