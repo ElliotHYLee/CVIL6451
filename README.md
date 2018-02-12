@@ -35,10 +35,10 @@ description
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/cd.jpg" width="400">
 <br>
 <pre>
-<dir align='center'>
+<div align='center'>
 md          cd
 </pre>
-</dir>
+</div>
 <br>
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/ms.jpg" width="400">
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/cs.jpg" width="400">
