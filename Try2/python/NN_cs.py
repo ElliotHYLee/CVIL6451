@@ -13,9 +13,9 @@ from DataPrep import *
 def csModel():
     model = Sequential()
     model.add(Dense(3, kernel_initializer="glorot_normal", activation='relu', input_dim = 3))
-    model.add(Dense(3, kernel_initializer="glorot_normal", activation='linear'))
+    model.add(Dense(3, kernel_initializer="glorot_normal", activation='sigmoid'))
     #model.compile(loss='mse', optimizer='adam')
-    model.save_weights('csNN.h5')
+    model.load_weights('csNN.h5')
     model.summary()
     return model
 
@@ -23,8 +23,8 @@ def csModel():
 
 def main():
 
-    x = np.array([[115, 82, 68]])
-    y = np.array([[115, 82, 68]])
+    x = np.array([[115, 82, 68]])/255
+    y = np.array([[115, 82, 68]])/255
     model = csModel()
 
     history_callback = model.fit(x, y, epochs=1000, batch_size=1, verbose=1,

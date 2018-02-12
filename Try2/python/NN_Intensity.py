@@ -14,7 +14,7 @@ def IntensityModel():
     model = Sequential()
     model.add(Dense(10, input_dim=3, kernel_initializer='glorot_normal', activation='relu'))
     model.add(Dense(5, kernel_initializer="glorot_normal", activation='relu'))
-    model.add(Dense(1, kernel_initializer="glorot_normal", activation='linear'))
+    model.add(Dense(1, kernel_initializer="glorot_normal", activation='sigmoid'))
     #model.compile(loss='mse', optimizer='adam')
     model.load_weights('intensityNN.h5')
     return model
@@ -25,7 +25,7 @@ def main():
     y = readGrayData()
 
     # history_callback = model.fit(x, y, epochs=1000, batch_size=10**6, verbose=1,
-    #                                    shuffle=False, validation_split=0.2)
+    #                                    shuffle=False, validation_split=0.0)
     #
     # model.save_weights('intensityNN.h5')
     # val_loss = history_callback.history["loss"]

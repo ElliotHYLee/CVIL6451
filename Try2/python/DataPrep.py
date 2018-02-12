@@ -75,13 +75,6 @@ def getTotalInput():
     x1 = readTotalInput()
     return x1, x2
 
-def getInputImg():
-    img = spym.imread('../img0.jpg')
-    h, w = img.shape[0], img.shape[1]
-    img = spym.imresize(img, (h/100, w/100))
-    spym.imshow(img)
-    return img
-
 if __name__ == '__main__':
     # x1, x2 = getTotalInput()
     # print x2.shape

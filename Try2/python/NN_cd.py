@@ -19,7 +19,7 @@ def cdModel(input_shape):
               return_sequences = False,
               input_shape=input_shape))
     model.add(Dense(20, kernel_initializer="glorot_normal", activation=LeakyReLU()))
-    model.add(Dense(3, kernel_initializer="glorot_normal", activation='linear'))
+    model.add(Dense(3, kernel_initializer="glorot_normal", activation='sigmoid'))
     #model.compile(loss='mse', optimizer='adam')
     model.load_weights('cdNN.h5')
     return model
@@ -31,7 +31,7 @@ def main():
     y = readCdData()
     model = cdModel(x.shape[1:])
 
-    history_callback = model.fit(x, y, epochs=100, batch_size=600, verbose=1,
+    history_callback = model.fit(x, y, epochs=300, batch_size=600, verbose=1,
                                        shuffle=False, validation_split=0.0)
 
     model.save_weights('cdNN.h5')

@@ -43,7 +43,7 @@ def dich(y_true, y_pred):
     l_est = ls+ld
 
     e = (l_est - y_true)**2
-    e = K.mean(e)
+    e = K.sum(e)
     return e
 
 def myLoss():
@@ -70,13 +70,13 @@ def main():
 
     x1, x2 = getTotalInput()
     x3 = x1
-    x4 = np.array([[115, 82, 68]])
+    x4 = np.array([[115, 82, 68]])/255
     x4 = np.repeat(x4, x1.shape[0], axis=0)
     y = x1
 
     model = dicho(x2.shape[1:])
-    #model.load_weights('dicho_total_proto.h5')
-    history_callback = model.fit([x1, x2, x3, x4], y, epochs=10, batch_size=50000, verbose=1,
+    model.load_weights('dicho_total0.h5')
+    history_callback = model.fit([x1, x2, x3, x4], y, epochs=20, batch_size=10000, verbose=1,
                                        shuffle=False, validation_split=0.0)
 
     model.save_weights('dicho_total0.h5')
@@ -86,18 +86,20 @@ def main():
     plt.show()
 
 
-    output = model.predict([x1, x2])
+    output = np.abs(model.predict([x1, x2, x3, x4]))
 
     pred = np.zeros((output.shape[0], 3))
-    const = output[:,0]
-    pred[:,0] = output[:,1]*const
-    pred[:,1] = output[:,2]*const
-    pred[:,2] = output[:,3]*const
+
+    md = output[:,0]
+    ms = output[:,4]
+    pred[:,0] = output[:,1]*md + output[:,5]*md
+    pred[:,1] = output[:,2]*md + output[:,6]*md
+    pred[:,2] = output[:,3]*md + output[:,7]*md
 
     print np.abs(y-pred)
     print output
     print output.shape
-    np.savetxt('../mdcd.txt', output)
+    np.savetxt('../mdcdmscs2.txt', output)
 
 
 if __name__ == '__main__':

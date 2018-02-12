@@ -78,23 +78,48 @@ min
 pixelNumList = pixelNumList(:,1)
 md_img = zeros_like(gray);
 cd_img = zeros_like(img);
-totalData = importdata('mdcd.txt');
+ms_img = zeros_like(gray);
+cs_img = zeros_like(img);
+totalData = importdata('mdcdmscs2.txt');
 start = 1
 for labelVal = 1:N
     last = start + pixelNumList(labelVal) - 1
     sp_md{labelVal} = totalData(start:last, 1);
     sp_cd{labelVal} = totalData(start:last, 2:4);
+    sp_ms{labelVal} = totalData(start:last, 5);
+    sp_cs{labelVal} = totalData(start:last, 6:8);
     start = last + 1
 end
 
 md_img = concatSP(sp_md, md_img, idx);
 cd_img = concatSP(sp_cd, cd_img, idx);
-
+ms_img = concatSP(sp_ms, ms_img, idx);
+cs_img = concatSP(sp_cs, cs_img, idx);
 
 figure
 imshow(md_img)
 
 figure
 imshow(cd_img)
+
+figure
+imshow(ms_img)
+
+figure
+imshow(cs_img)
+
+
+figure
+imshow(md_img.*cd_img)
+
+figure
+imshow(ms_img.*cs_img)
+
+figure
+imshow(md_img.*cd_img + ms_img.*cs_img)
+
+
+
+
 
 
