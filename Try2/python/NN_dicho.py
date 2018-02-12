@@ -70,16 +70,17 @@ def main():
 
     x1, x2 = getTotalInput()
     x3 = x1
-    x4 = np.array([[115, 82, 68]])/255
+    #x4 = np.array([[115, 82, 68]])/255
+    x4 = np.random.rand(1,3)
     x4 = np.repeat(x4, x1.shape[0], axis=0)
     y = x1
 
     model = dicho(x2.shape[1:])
-    model.load_weights('dicho_total0.h5')
-    history_callback = model.fit([x1, x2, x3, x4], y, epochs=20, batch_size=10000, verbose=1,
+    model.load_weights('dicho_total2.h5')
+    history_callback = model.fit([x1, x2, x3, x4], y, epochs=100, batch_size=60000, verbose=1,
                                        shuffle=False, validation_split=0.0)
 
-    model.save_weights('dicho_total0.h5')
+    model.save_weights('dicho_total2.h5')
     val_loss = history_callback.history["loss"]
     plt.figure()
     plt.plot(val_loss, 'r')

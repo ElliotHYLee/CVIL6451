@@ -1,7 +1,10 @@
 clc, clear, close all
 
 %% Read an image
-img = getImage('img0.jpg');
+%img = getImage('img0.jpg', 5);
+img = getImage('img1.jpg', 2);
+%img = getImage('img2.jpg', 4);
+
 
 img = im2double(img);
 figure
@@ -11,7 +14,7 @@ figure
 imshow(gray)
 
 %% super pixel image
-[L,N] = superpixels(img, 500);
+[L,N] = superpixels(img, 10000);
 BW = boundarymask(L);
 idx = label2idx(L);
 
@@ -41,26 +44,26 @@ for i =1:1:N
    dlmwrite(strcat('data/CD_lstm/cd_input', int2str(i-1), '.txt'), spixel, 'delimiter',' ')
 end
 min
-% dlmwrite('data/CD_lstm/cd_init.txt', color, 'delimiter',' ')
-% dlmwrite('data/CD_lstm/cd_info.txt', [min, N], 'delimiter',' ')
-% 
-% %% FC data gen -- Ms & md
-% imgArray = reshape(img, [numRows*numCols, 3]);
-% grayArray = reshape(gray, [numRows*numCols, 1]);
-% % img(1,1,:)
-% % img(2,1,:)
-% 
-% dlmwrite('data/M_fc/color.txt', imgArray, 'delimiter',' ')
-% dlmwrite('data/M_fc/gray.txt', grayArray, 'delimiter',' ')
-% 
-% 
+dlmwrite('data/CD_lstm/cd_init.txt', color, 'delimiter',' ')
+dlmwrite('data/CD_lstm/cd_info.txt', [min, N], 'delimiter',' ')
+
+%% FC data gen -- Ms & md
+imgArray = reshape(img, [numRows*numCols, 3]);
+grayArray = reshape(gray, [numRows*numCols, 1]);
+% img(1,1,:)
+% img(2,1,:)
+
+dlmwrite('data/M_fc/color.txt', imgArray, 'delimiter',' ')
+dlmwrite('data/M_fc/gray.txt', grayArray, 'delimiter',' ')
+
+
 % gArr = importdata('data/M_fc/predGray.txt');
 % recovImg = reshape(gArr, [numRows, numCols, 1]);
 % figure
 % imshow(recovImg)
-% 
-% 
-% 
+
+
+
 % cd_img_rec = zeros(size(img),'like',img);
 % recColor = importdata('data/CD_lstm/cd_pred.txt');
 % for labelVal = 1:N
@@ -70,25 +73,25 @@ min
 %     color(labelVal, :) = [mean(img(redIdx)), mean(img(greenIdx)), mean(img(blueIdx))];
 %     cd_img_rec = updateImg(cd_img_rec, recColor, idx, labelVal, 3);
 % end   
-% 
+
 % figure
 % imshow(cd_img_rec)
 
 
-pixelNumList = pixelNumList(:,1)
+pixelNumList = pixelNumList(:,1);
 md_img = zeros_like(gray);
 cd_img = zeros_like(img);
 ms_img = zeros_like(gray);
 cs_img = zeros_like(img);
 totalData = importdata('mdcdmscs2.txt');
-start = 1
+start = 1;
 for labelVal = 1:N
-    last = start + pixelNumList(labelVal) - 1
+    last = start + pixelNumList(labelVal) - 1;
     sp_md{labelVal} = totalData(start:last, 1);
     sp_cd{labelVal} = totalData(start:last, 2:4);
     sp_ms{labelVal} = totalData(start:last, 5);
     sp_cs{labelVal} = totalData(start:last, 6:8);
-    start = last + 1
+    start = last + 1;
 end
 
 md_img = concatSP(sp_md, md_img, idx);
