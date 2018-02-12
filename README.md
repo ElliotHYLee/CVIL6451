@@ -34,11 +34,13 @@ description
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/md.jpg" width="400">
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/cd.jpg" width="400">
 <br>
-md cd
+<pre>
+md          cd
+</pre>
 <br>
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/ms.jpg" width="400">
-
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Try2/Images/cs.jpg" width="400">
+<br>
 ms, cs
 </ul>
 
