@@ -11,6 +11,7 @@ from DataPrep import *
 from NN_cd import cdModel
 from NN_Intensity import IntensityModel
 from NN_cs import csModel
+import sys
 
 def getCol(i, tensor):
     col = tensor[:,i]
@@ -66,25 +67,27 @@ def dicho(input_shape):
     return model
 
 
-def main():
+def main(imgIndex):
 
     x1, x2 = getTotalInput()
     x3 = x1
-    x4 = np.array([[115, 82, 68]])/255
+    #x4 = np.array([[115, 82, 68]])/255
+    x4 = np.random.rand(1,3)
     x4 = np.repeat(x4, x1.shape[0], axis=0)
     y = x1
 
     model = dicho(x2.shape[1:])
-    model.load_weights('dicho_total0.h5')
-    history_callback = model.fit([x1, x2, x3, x4], y, epochs=20, batch_size=10000, verbose=1,
-                                       shuffle=False, validation_split=0.0)
+    fname = 'dicho_total' + str(imgIndex+1) + '.h5'
+    model.load_weights(fname)
+    history_callback = model.fit([x1, x2, x3, x4], y,
+                                 epochs=10, batch_size=60000, verbose=1,
+                                 shuffle=False, validation_split=0.0)
 
-    model.save_weights('dicho_total0.h5')
+    #model.save_weights('dicho_total1.h5')
     val_loss = history_callback.history["loss"]
     plt.figure()
     plt.plot(val_loss, 'r')
     plt.show()
-
 
     output = np.abs(model.predict([x1, x2, x3, x4]))
 
@@ -99,8 +102,9 @@ def main():
     print np.abs(y-pred)
     print output
     print output.shape
-    np.savetxt('../mdcdmscs2.txt', output)
-
+    np.savetxt('../mdcdmscs.txt', output)
+    #print 'Go back to Matlab and press enter.'
 
 if __name__ == '__main__':
-    main()
+    imgIndex = int(sys.argv[1])
+    main(imgIndex)
