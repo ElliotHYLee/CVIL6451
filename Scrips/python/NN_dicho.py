@@ -84,10 +84,10 @@ def main(imgIndex):
                                  shuffle=False, validation_split=0.0)
 
     #model.save_weights('dicho_total1.h5')
-    val_loss = history_callback.history["loss"]
-    plt.figure()
-    plt.plot(val_loss, 'r')
-    plt.show()
+    # val_loss = history_callback.history["loss"]
+    # plt.figure()
+    # plt.plot(val_loss, 'r')
+    # plt.show()
 
     output = np.abs(model.predict([x1, x2, x3, x4]))
 
@@ -104,6 +104,9 @@ def main(imgIndex):
     print output.shape
     np.savetxt('../mdcdmscs.txt', output)
     #print 'Go back to Matlab and press enter.'
+
+
+
 
 if __name__ == '__main__':
     imgIndex = int(sys.argv[1])

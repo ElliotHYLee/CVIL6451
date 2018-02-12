@@ -1,5 +1,5 @@
 clc, clear, close all
-imgIndex = 0  % available imgIndex = 0, 1, 2
+imgIndex = 1  % available imgIndex = 0, 1, 2
 superPixelNum = 10000
 %% Read an image
 if imgIndex == 0
@@ -16,8 +16,8 @@ gray = rgb2gray(img);
 
 %% super pixel image
 [sp_img, numRows, numCols, N, idx, meanColor, pixelNumList] = getSuperPixel(img, superPixelNum);
-
 % imshow(imoverlay(cd_img,BW,'cyan'))
+
 
 disp('Generating data for Keras/Tensorflow Optimizer...')
 %% lstm data gen --- CD
@@ -68,7 +68,6 @@ cd_img = concatSP(sp_cd, cd_img, idx);
 ms_img = concatSP(sp_ms, ms_img, idx);
 cs_img = concatSP(sp_cs, cs_img, idx);
 
-
 showImg('Observed', img)
 showImg('SuperPixel', sp_img)
 showImg('mD', md_img);
@@ -80,7 +79,4 @@ showImg('LS', ms_img.*cs_img)
 showImg('L', md_img.*cd_img + ms_img.*cs_img)
 
 disp('end of program')
-
-
-
 
