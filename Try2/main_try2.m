@@ -2,14 +2,16 @@ clc, clear, close all
 
 %% Read an image
 img = getImage('img0.jpg');
+
 img = im2double(img);
 figure
 imshow(img)
 gray = rgb2gray(img);
-
+figure
+imshow(gray)
 
 %% super pixel image
-[L,N] = superpixels(img, 2);
+[L,N] = superpixels(img, 10);
 BW = boundarymask(L);
 idx = label2idx(L);
 
@@ -29,4 +31,17 @@ figure
 imshow(imoverlay(cd_img,BW,'cyan'))
 
 spList_cd  = getSPList(img, idx, N);
+for i =1:1:N
+   spixel = spList_cd{i};
+   dlmwrite(strcat('data/cd_input', int2str(i), '.txt'), spixel, 'delimiter','\t')
+end
 dlmwrite('data/cd_init.txt', color, 'delimiter','\t')
+
+imgArray = reshape(img, [numRows*numCols, 3]);
+
+img(1,1,:)
+img(2,1,:)
+
+recovImg = reshape(imgArray, [numRows, numCols, 3]);
+figure
+imshow(recovImg)
