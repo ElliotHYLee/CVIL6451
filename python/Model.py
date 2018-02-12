@@ -19,23 +19,39 @@ def dich(y_true, y_pred):
     cdG = getCol(2,y_pred)
     cdB = getCol(3,y_pred)
 
-    sR = getCol(4,y_pred)
+    ms = getCol(4, y_pred)
+    sR = getCol(5,y_pred)
     sR = K.ones_like(sR)*K.mean(sR)
-    sG = getCol(5,y_pred)
+    sG = getCol(6,y_pred)
     sG = K.ones_like(sG)*K.mean(sG)
-    sB = getCol(6,y_pred)
+    sB = getCol(7,y_pred)
     sB = K.ones_like(sB)*K.mean(sB)
 
-    predR = md*cdR + sR
-    predG = md*cdG + sG
-    predB = md*cdB + sB
+    ldR = md*cdR
+    ldG = md*cdG
+    ldB = md*cdB
 
-    pred = K.concatenate([predR, predG, predB], axis=1)
+    lsR = ms*sR
+    lsG = ms*sG
+    lsB = ms*sB
+
+    predR = ldR + lsR
+    predG = ldG + lsG
+    predB = ldB + lsB
+
+    pred_total = K.concatenate([predR, predG, predB], axis=1)
+    pred_diffused = K.concatenate([ldR, ldG, ldB], axis=1)
+    pred_spectrail = K.concatenate([lsR, lsG, lsB], axis=1)
 
     true = y_true[:,1:4]
+    true_color_norm = getCol(0, true) + getCol(1, true) + getCol(2, true)
+    diffused_norm = ldR + ldG + ldB
 
-    e = K.abs(pred - true) + 1/sR + 1/sG + 1/sB
-    e = K.mean(e)
+    diffErr = K.abs(pred_diffused/diffused_norm - true/true_color_norm)
+
+
+    e = K.abs(pred_total - true) + diffErr
+    e = K.sum(e)
     return e
 
 def myLoss():
@@ -48,6 +64,6 @@ def getNewModel(input_dim):
     model = Sequential()
     model.add(Dense(5, input_dim=input_dim, kernel_initializer="uniform", activation='relu'))
     model.add(Dense(5, kernel_initializer="uniform", activation='relu'))
-    model.add(Dense(7, kernel_initializer="uniform", activation='linear'))
+    model.add(Dense(8, kernel_initializer="uniform", activation='linear'))
     model.compile(loss=myLoss(), optimizer='adam')
     return model
