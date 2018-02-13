@@ -1,6 +1,6 @@
 clc, clear, close all
 %% Read an image
-imgIndex = 0  % available imgs: 0, 1, 2
+imgIndex = 2  % available imgs: 0, 1, 2
 
 if imgIndex == 0
     [img, totalData] = getImageWithResultData('img0.jpg', 5, 0);
