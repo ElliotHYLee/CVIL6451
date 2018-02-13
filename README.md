@@ -14,7 +14,7 @@ Please see manual.pdf
 
 ## Run
 1. main_full.m 
-This will run the full pipe line of the program. However, depending on machine, the optimizer may stop early so error may be large. It may happen to cpu-based tensorflow library.
+This will run the full pipe line of the program. However, it requires dependencies. Also, depending on machine, the optimizer may stop early so error may be large. It may happen to cpu-based tensorflow library.
 
 2. main_light.m
 This will show the result images. It is stand-alone.
