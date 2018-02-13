@@ -24,11 +24,6 @@ This will show the result images. It is stand-alone.
 ## Quick Overview of The Results
 
 
-
-## Traing Results
-
-description
-
 <ul>
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Scripts/Images/md.jpg" width="400">
 <img src="https://github.com/ElliotHYLee/CVIL6451/blob/master/Scripts/Images/cd.jpg" width="400">
