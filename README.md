@@ -9,7 +9,9 @@ Matlab
 Tensorflow version
 Kears
 
+<a href = 'https://github.com/ElliotHYLee/CVIL6451/blob/master/manual.pdf'>
 Please see manual.pdf
+</a>
 
 
 ## Run
