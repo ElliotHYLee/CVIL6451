@@ -80,7 +80,7 @@ def main(imgIndex):
     fname = 'dicho_total' + str(imgIndex+1) + '.h5'
     model.load_weights(fname)
     history_callback = model.fit([x1, x2, x3, x4], y,
-                                 epochs=10, batch_size=60000, verbose=1,
+                                 epochs=10, batch_size=100, verbose=1,
                                  shuffle=False, validation_split=0.0)
 
     #model.save_weights('dicho_total1.h5')
