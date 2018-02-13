@@ -3,24 +3,21 @@
 Uploaded for Civil 6451 Mid term 1
 
 
-## ToDo
-1. Running Manual
-
 ## Prereq.s
 
 Matlab
 Tensorflow version
 Kears
 
+Please see manual.pdf
 
-python libraries:
 
-```
-chmod +x pythonReady.sh
-yes "yes" | sudo sh pythonReady.sh
-```
 ## Run
+1. main_full.m 
+This will run the full pipe line of the program. However, depending on machine, the optimizer may stop early so error may be large. It may happen to cpu-based tensorflow library.
 
+2. main_light.m
+This will show the result images. It is stand-alone.
 
 ## Quick Overview of The Results
 
