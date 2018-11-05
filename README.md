@@ -1,7 +1,7 @@
 # dichromatic reflection model
 The true repository will be linked after the publication.
 
-
+The possible application can be light elimination/sepration from an observed scene.
 ## Prereq.s
 
 Matlab
