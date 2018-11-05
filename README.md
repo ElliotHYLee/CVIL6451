@@ -1,6 +1,5 @@
 # dichromatic reflection model
-Elliot Lee.5275
-Uploaded for Civil 6451 Mid term 1
+The true repository will be linked after the publication.
 
 
 ## Prereq.s
